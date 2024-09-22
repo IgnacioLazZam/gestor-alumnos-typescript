@@ -32,6 +32,7 @@ function main(){
     let materiasManager = new MateriasManager(arrayMaterias);
 
     let x = 1;
+    let idAlumno;
 
     do {
 
@@ -57,24 +58,36 @@ function main(){
                 break;
             case 4:
                 alumnosManager.listarAlumnos();
+
                 console.log("Elija alumnno por id: ")
-                let idAlumno = readline.prompt();
+                idAlumno = readline.prompt();
+
                 materiasManager.listarMaterias();
+
                 console.log("Elija materia por id: ")
                 let idMateria = readline.prompt();
-                // for (let materia of arrayMaterias){
-                //     if (materia.getId()==idMateria){
-                //         let materiaAsign = materia;
-                //     }
+
+                let materiaAsign: Materia = new Materia("");
+
+                for (let materia of arrayMaterias){
+                    if (materia.getId() == parseInt(idMateria)){
+                        materiaAsign = materia;
+                    }
                     
-                // }
-                // alumnosManager.asignarMateria(idAlumno, idMateria);
+                }
+                alumnosManager.asignarMateria(parseInt(idAlumno), materiaAsign);
                 break;
             case 5:
+                alumnosManager.listarAlumnos();
+                console.log("Elija un alumno por id: ")
+                idAlumno = readline.prompt();
+                alumnosManager.listarMateriasAlumno(parseInt(idAlumno));
                 break;
             case 6:
+                alumnosManager.asignarNotaAMateriaAlumno();
                 break;
             case 7:
+                alumnosManager.listarAlumnosConNota();
                 break;
             case 8:
                 x = 0;
